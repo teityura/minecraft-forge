@@ -55,7 +55,7 @@ ops.json
 whitelist.json
 banned-ips.json
 banned-players.json
-#mods/
+mods/
 )
 
 
