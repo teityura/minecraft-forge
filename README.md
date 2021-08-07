@@ -1,12 +1,12 @@
-# Minecraft-Spigot on Docker
+# Minecraft-Forge on Docker
 
 ## git clone
 
 ```
 mkdir -p ~/containers/
 cd ~/containers/
-git clone https://github.com/teityura/minecraft-spigot.git
-cd minecraft-spigot/
+git clone https://github.com/teityura/minecraft-forge.git
+cd minecraft-forge/
 ```
 
 ## マイクラコンテナを起動
@@ -19,16 +19,16 @@ docker-compose exec minecraft-server ps aux
 docker-compose logs -f
 ```
 
-## プラグインを追加する場合
+## MODを追加する場合
 
 ```
-vim plugins-downloader/plugins.csv
+vim mods-downloader/mods.csv
 
-project_url,plugin_url,plugin_name
-https://dev.bukkit.org/projects/dynmap,https://media.forgecdn.net/files/3242/277/Dynmap-3.1-spigot.jar,Dynmap-3.1-spigot.jar
+project_url,mod_url,mod_name
+https://www.curseforge.com/minecraft/mc-mods/buildcraft,https://media.forgecdn.net/files/3204/475/buildcraft-all-7.99.24.8.jar,buildcraft-all-7.99.24.8.jar
 ```
 
-## spigotのヒープ領域のサイズを変更
+## forgeのヒープ領域のサイズを変更
 
 .envを適宜変更 (単位はMB)
 
@@ -53,9 +53,9 @@ XMX_SIZE=8192
 docker-compose down
 
 # スクリプトを実行して、アーカイブを作成する
-~/containers/minecraft-spigot/savedata-manager/create-archive.sh \
-  ~/containers/minecraft-spigot/minecraft-server/server-contents/ \
-  ~/containers/minecraft-spigot/savedata-manager/savedata-archives/
+~/containers/minecraft-forge/savedata-manager/create-archive.sh \
+  ~/containers/minecraft-forge/minecraft-server/server-contents/ \
+  ~/containers/minecraft-forge/savedata-manager/savedata-archives/
 
 # savedata-archives/savedata-20210602021441.tar.gz みたいなのができる
 ```
@@ -81,10 +81,10 @@ tar cvzf "savedata-`date '+%Y%m%d%H%M%S'`.tar.gz" \
 ```
 # scp など使って、以下のように配置する
 scp savedata-20210602021441.tar.gz \
-  docker-host:/root/containers/minecraft-spigot/savedata-manager/savedata-archives/
+  docker-host:/root/containers/minecraft-forge/savedata-manager/savedata-archives/
 
 # 下記のように配置できていればOK
-# ~/containers/minecraft-spigot/savedata-manager/savedata-archives/savedata-20210602021441.tar.gz
+# ~/containers/minecraft-forge/savedata-manager/savedata-archives/savedata-20210602021441.tar.gz
 ```
 
 3. アーカイブを展開して、マイクラコンテナを起動する
